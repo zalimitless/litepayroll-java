@@ -1,17 +1,27 @@
-package com.payroll.e.litepayroll;
+package com.payroll.e.litepayroll.DTO;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Column;
 
 @Entity
+@Table(name = "EmployeeDetails")
 public class EmployeeDTO
 {
+    @Column(name = "EmployeeNumber")
     private @Id Long employeeNumber;
+    @Column(name = "FirstNames")
     private String firstNames;
+    @Column(name = "LastName")
     private String lastName;
+    @Column(name = "Salutation")
     private int salutation;
+    @Column(name = "Gender")
     private int gender;
-    private float grossSalary;
+    @Column(name = "GrossSalary", nullable = true)
+    private Float grossSalary;
+    @Column(name = "ProfileColour")
     private int profileColour;
 
     public EmployeeDTO() {
@@ -122,5 +132,10 @@ public class EmployeeDTO
                 ", grossSalary=" + grossSalary +
                 ", profileColour=" + profileColour +
                 '}';
+    }
+
+    public EmployeeBasicDTO toBasic()
+    {
+        return new EmployeeBasicDTO(employeeNumber, firstNames, lastName, salutation, profileColour);
     }
 }
